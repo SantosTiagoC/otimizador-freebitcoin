@@ -1,11 +1,12 @@
 // src/App.jsx
 
-import { useState } from 'react'; // Importamos o useState
+import { useState } from 'react';
 import RewardPointsOptimizer from './components/RewardPointsOptimizer';
 import InterestCalculator from './components/InterestCalculator';
+import RiskManager from './components/RiskManager'; // 1. Importamos o novo componente
 
 function App() {
-  // 1. Estado para controlar qual aba está ativa. Começamos com o otimizador.
+  // Começamos na aba de 'otimizador' por padrão
   const [activeTab, setActiveTab] = useState('optimizer');
 
   // Estilos para reutilizar nos botões das abas
@@ -13,13 +14,9 @@ function App() {
   const inactiveTabStyle = 'bg-gray-700 text-gray-400 hover:bg-gray-600';
 
   return (
-    // Container principal da página
     <div className="bg-gray-900 text-white min-h-screen w-full flex flex-col items-center p-4 font-sans">
-
-      {/* Container geral para as ferramentas */}
       <div className="w-full max-w-2xl">
-
-        {/* 2. Botões das Abas */}
+        {/* 2. Adicionamos o botão para a terceira aba */}
         <div className="flex justify-center space-x-2 mb-8 p-1 bg-gray-800 rounded-xl">
           <button
             onClick={() => setActiveTab('optimizer')}
@@ -33,18 +30,22 @@ function App() {
           >
             Calculadora de Juros
           </button>
+          <button
+            onClick={() => setActiveTab('risk')}
+            className={`w-full py-3 rounded-lg transition-colors duration-300 ${activeTab === 'risk' ? activeTabStyle : inactiveTabStyle}`}
+          >
+            Gerenciador de Risco
+          </button>
         </div>
 
-        {/* 3. Renderização Condicional do Componente */}
-        {/* Mostra um componente ou outro baseado no estado 'activeTab' */}
+        {/* 3. Adicionamos a lógica para renderizar o terceiro componente */}
         <div>
           {activeTab === 'optimizer' && <RewardPointsOptimizer />}
           {activeTab === 'interest' && <InterestCalculator />}
+          {activeTab === 'risk' && <RiskManager />}
         </div>
-
       </div>
 
-      {/* Call to Action Geral no final da página */}
       <div className="text-center mt-10">
         <a
           href="https://freebitco.in/?r=SEU_ID_AQUI" // <<<---- LEMBRE-SE DE TROCAR AQUI
@@ -55,7 +56,6 @@ function App() {
           Comece a Ganhar no FreeBitco.in
         </a>
       </div>
-
     </div>
   );
 }
