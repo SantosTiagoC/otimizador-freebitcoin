@@ -1,5 +1,6 @@
 // src/App.jsx
 
+import ReloadPrompt from './components/ReloadPrompt';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next'; // 1. Importamos o hook de tradução
 import RewardPointsOptimizer from './components/RewardPointsOptimizer';
